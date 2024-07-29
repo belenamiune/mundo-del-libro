@@ -1,0 +1,35 @@
+body {
+    background-color: rgb(203, 200, 200) !important;
+}
+
+.container-fluid {
+    padding-left: 20px !important;
+}
+
+h3 {
+    text-align: center;
+}
+
+
+p {
+    font-weight: bolder;
+}
+
+.form-control {
+    margin-bottom: 0.5em;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.cart {
+    padding-top: 20em;
+    padding-left: 10em; 
+}
+
+.list-group-item {
+    background-color: rgb(241, 239, 239) !important;
+}
