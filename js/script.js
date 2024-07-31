@@ -1,12 +1,15 @@
 // Variables
 let boooks = [];
 let cart = [];
-const peso = '$';
+const price = '$';
+const switchIcon = document.getElementById("switch");
+switchIcon.classList = "fa-solid fa-sun"
 const booksList = document.querySelector('#books');
 const cartEl = document.querySelector('#cart');
 const total = document.querySelector('#total');
 const buttonEmptyCart = document.querySelector('#emptyCart');
 const buyBookButton = document.querySelector('#buyBook');
+let input = document.getElementById('input');
 
 
 // Llama a la base de datos para obtener todos los libros disponibles en dicho archivo .json
@@ -43,18 +46,18 @@ renderBooks = () => {
         
         // Autor
         const miNodeAutor = document.createElement('h6');
-        miNodeAutor.classList.add('card-text');
+        miNodeAutor.classList.add('card-text', 'autor');
         miNodeAutor.textContent = info.autor;
 
         // Image
         const miNodeImage = document.createElement('img');
-        miNodeImage.classList.add('img-f', 'card-img-top');
+        miNodeImage.classList.add('img', 'card-img-top');
         miNodeImage.setAttribute('src', info.image);
 
         // Precio
         const miNodePrice = document.createElement('p');
-        miNodePrice.classList.add('card-text');
-        miNodePrice.textContent = `${peso} ${info.price}`;
+        miNodePrice.classList.add('card-text', 'price');
+        miNodePrice.textContent = `${price} ${info.price}`;
 
         // Boton para agregar al carrito
         const miNodeButton = document.createElement('button');
@@ -79,41 +82,38 @@ renderBooks = () => {
 addToCart = (event) => {
     cart.push(event.target.getAttribute('marker'));
     renderCart();
-    
-    toggleCart();
 }
 
 // Función que muestra todos los elementos cargados al carrito visualemente
 renderCart = () => {
-    cartEl.textContent = '';
+        cartEl.textContent = '';
     
-    const cartWithoutDuplicates = [...new Set(cart)];
-
-    cartWithoutDuplicates.forEach((item) => {
-        const miItem = books.filter((itemsList) => {
-            return itemsList.id === parseInt(item);
+        const cartWithoutDuplicates = [...new Set(cart)];
+    
+        cartWithoutDuplicates.forEach((item) => {
+            const miItem = books.filter((itemsList) => {
+                return itemsList.id === parseInt(item);
+            });
+            
+            const itemAmount = cart.reduce((total, itemId) => {
+                return itemId === item ? total += 1 : total;
+            }, 0);
+    
+            const miNode = document.createElement('li');;
+            miNode.classList.add('list-group-item', 'text-right', 'mx-2');
+            miNode.textContent = `${itemAmount} x ${miItem[0].name} - ${price}${miItem[0].price}`;
+            
+    
+            const miButton = document.createElement('button');
+            miButton.classList.add('btn', 'btn-danger', 'mx-5', 'btn-delete');
+            miButton.textContent = 'X';
+            miButton.style.marginLeft = '1rem';
+            miButton.dataset.item = item;
+            miButton.addEventListener('click', deleteBookfromCart);
+            miNode.appendChild(miButton);
+            cartEl.appendChild(miNode);
         });
-        
-        const itemAmount = cart.reduce((total, itemId) => {
-            return itemId === item ? total += 1 : total;
-        }, 0);
-
-        const miNode = document.createElement('li');
-        miNode.classList.add('list-group-item', 'text-right', 'mx-2');
-        miNode.textContent = `${itemAmount} x ${miItem[0].name} - ${peso}${miItem[0].price}`;
-        
-
-        const miButton = document.createElement('button');
-        miButton.classList.add('btn', 'btn-danger', 'mx-5');
-        miButton.textContent = 'X';
-        miButton.style.marginLeft = '1rem';
-        miButton.dataset.item = item;
-        miButton.addEventListener('click', deleteBookfromCart);
-        miNode.appendChild(miButton);
-        cartEl.appendChild(miNode);
-    });
-    total.textContent = calcTotal();
-
+        total.textContent = calcTotal();
 }
 
 // Función que elimina un libro del carrito
@@ -141,6 +141,11 @@ emptyCart = () => {
     renderCart();
 }
 
+// Función que abre el carrito
+toggleCart = () => {
+    document.querySelector('.sidecart').classList.toggle('open-cart');
+}
+
 // Función para confirmar la compra
 buyBook = () => {
     if(cart.length > 0) {
@@ -164,8 +169,9 @@ showSuccessAlert = () => {
     successAlert.role = "alert"
     successAlert.className = "alert alert-success alert-dismissible fade show";
     successAlert.textContent = `¡Muchísimas gracias por su compra ${userData.userName}! Pronto estará recibiendo en ${userData.email} la factura correspondiente.`
-    const container = document.querySelector(".totals");
+    const container = document.querySelector(".show-alerts");
     container.appendChild(successAlert);
+    toggleCart();
 
     setTimeout(() => {
         container.removeChild(successAlert)
@@ -178,20 +184,100 @@ showWarningAlert = () => {
     warningAlert.role = "alert"
     warningAlert.className = "alert alert-warning alert-dismissible fade show";
     warningAlert.textContent = "Para continuar con la compra debe agregar por lo menos un item al carrito.";
-    const container = document.querySelector(".totals");
+    const container = document.querySelector(".show-alerts");
     container.appendChild(warningAlert);
+    toggleCart();
 
     setTimeout(() => {
         container.removeChild(warningAlert)
     }, 5000);
 }
 
+// Función para cambiar el modo visual de la página
+switchMode = () => {
+   let icon = document.getElementById("switch");
+   let navbar = document.getElementById("navbar");
+   let sidecart = document.querySelector('.sidecart');
+
+   
+   let cardBody = document.getElementsByClassName("card");
+   let cardTitle = document.getElementsByClassName("card-title");
+   let cardSubtitle = document.getElementsByClassName("card-text");
+   let cardAutor = document.getElementsByClassName("autor");
+   let cardPrice = document.getElementsByClassName("price");
+   let bookAdded = document.getElementsByClassName("list-group-item");
+
+    if (document.documentElement.getAttribute('data-bs-theme') == 'dark') {
+        document.documentElement.setAttribute('data-bs-theme','light')
+        icon.classList = "fa-solid fa-sun";
+        document.body.classList = "light-mode";
+        navbar.classList = "navbar-light";
+        sidecart.classList.toggle("sidecart-light")
+        sidecart.classList.remove("sidecart-dark");
+
+        for (let i = 0; i < cardTitle.length; i++) {
+            ((index) => {
+                cardBody[index].classList.add("dark-body");
+                cardTitle[index].classList.add("light-text");
+                cardSubtitle[index].classList.add("light-text");
+                cardAutor[index].classList.add("light-text");
+                cardPrice[index].classList.add("light-text");
+            })(i);
+          }
+
+          for(let i = 0; i < bookAdded.length; i++) {
+            ((index) => {
+                    bookAdded[index].classList.add("dark-body");
+            })(i);
+          }
+        
+    }
+    else {
+        icon.classList = "fa-solid fa-moon";
+        document.documentElement.setAttribute('data-bs-theme','dark');
+        document.body.classList = "dark-mode"
+        navbar.classList = "navbar-dark"
+        sidecart.classList.toggle("sidecart-dark");
+        sidecart.classList.remove("sidecart-light")
+
+        for (let i = 0; i < cardTitle.length; i++) {
+            ((index) => {
+                cardBody[index].classList.add("dark-body");
+                cardTitle[index].classList.add("dark-text");
+                cardSubtitle[index].classList.add("dark-text");
+                cardAutor[index].classList.add("dark-text");
+                cardPrice[index].classList.add("dark-text");
+            })(i);
+          }
+
+          for(let i = 0; i < bookAdded.length; i++) {
+            ((index) => {
+                    bookAdded[index].classList.add("dark-body");
+            })(i);
+          }
+    }
+}
+
 // Eventos
 buttonEmptyCart.addEventListener('click', emptyCart);
 buyBookButton.addEventListener('click', buyBook);
 
-// Funciones que se inician con el proyecto
-function toggleCart(){
-    document.querySelector('.sidecart').classList.toggle('open-cart');
-  }
-  
+
+// Función que filtra por titulo de libro
+filterByTitle = () => {
+    let booksCard = document.getElementsByClassName("card");
+    let filter = input.value.toUpperCase();
+        for (let i = 0; i < books.length; i++) {
+             let bookName = booksCard[i].getElementsByClassName('card-title')[0].innerHTML;
+            if (bookName.toUpperCase().indexOf(filter) == 0) {
+                booksCard[i].style.display = 'list-group-item';   
+            } else {
+                booksCard[i].style.display = 'none';
+            }
+    }
+}
+
+resetFilters = () => {
+    input.value = ""
+    renderBooks();
+}
