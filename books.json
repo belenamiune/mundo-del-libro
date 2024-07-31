@@ -1,0 +1,112 @@
+[
+    {
+        "id": 1,
+        "autor": "Gabriel Garcia Marquez",
+        "name": "En Agosto nos vemos",
+        "image":"assets/1.webp",
+        "price": 20000
+    
+    },
+    {
+        "id": 2,
+        "autor": "María Lobo",
+        "name": "Ciudad, 1951",
+        "image":"assets/2.webp",
+        "price": 24000
+       
+    },
+    {
+        "id": 3,
+        "autor": "Gabriel Rolón",
+        "name": "El duelo",
+        "image":"assets/3.webp",
+        "price": 17000
+       
+    },
+    {
+        "id": 4,
+        "autor": "Cecilia Ce",
+        "name": "Deseo",
+        "image":"assets/4.webp",
+        "price": 24900
+       
+    },
+    {
+        "id": 5,
+        "autor": "Fernando Martin Peña",
+        "name": "Metropolis",
+        "image":"assets/5.webp",
+        "price": 31000
+       
+    },
+    {
+        "id": 6,
+        "autor": "John Grisham",
+        "name": "El intercambio",
+        "image":"assets/6.webp",
+        "price": 26999
+    },
+    {
+        "id": 7,
+        "autor": "Becca, Fitzpatrick",
+        "name": "Silencio - Hush Hush 3",
+        "image":"assets/7.webp",
+        "price": 26999
+    },
+    {
+        "id": 8,
+        "autor": "Ian, Rankin",
+        "name": "Muerte helada",
+        "image":"assets/8.webp",
+        "price": 24900
+    },
+    {
+        "id": 9,
+        "autor": "Cecilia Paula, Ruggiero",
+        "name": "Acá Estamos Volviendo",
+        "image":"assets/9.webp",
+        "price": 4000
+    },
+    {
+        "id": 10,
+        "autor": "Paulo, Coelho",
+        "name": "El Alquimista",
+        "image":"assets/10.webp",
+        "price": 18900
+    },
+    {
+        "id": 11,
+        "autor": "Bernie, Gunther",
+        "name": "Azul de Prusia",
+        "image":"assets/11.webp",
+        "price": 24900
+    },
+    {
+        "id": 12,
+        "autor": "Mikel Alonso, Lopez",
+        "name": "El Cerebro Optimista",
+        "image":"assets/12.webp",
+        "price": 22300
+    },
+    {
+        "id": 13,
+        "autor": "Chung, Bora",
+        "name": "Conejo Maldito",
+        "image":"assets/13.webp",
+        "price": 25990
+    },
+    {
+        "id": 14,
+        "autor": "Gastón, Edul",
+        "name": "Revolución Messi",
+        "image":"assets/14.webp",
+        "price": 19500
+    },
+    {
+        "id": 15,
+        "autor": "Freida, Mcfadden",
+        "name": "La Asistenta",
+        "image":"assets/15.webp",
+        "price": 26299
+    }
+]

@@ -1,55 +1,5 @@
 // Variables
-const books =  [ 
-        {
-            id: 1,
-            autor: "Gabriel Garcia Marquez",
-            name: "En Agosto nos vemos",
-            imagen:"assets/1.jpg",
-            price: 20000
-        
-        },
-        {
-            id: 2,
-            autor: "María Lobo",
-            name: "Ciudad, 1951",
-            imagen:"assets/2.jpg",
-            price: 24000
-           
-        },
-        {
-            id: 3,
-            autor: "Gabriel Rolón",
-            name: "El duelo",
-            imagen:"assets/3.jpg",
-            price: 17000
-           
-        },
-        {
-            id: 4,
-            autor: "Mariano Rojas Estapen",
-            name: "Como hacer que te pasen cosas buenas",
-            imagen:"assets/4.jpg",
-            price: 30000
-           
-        },
-        {
-            id: 5,
-            autor: "Florencia Bonelli",
-            name: "La casa Neville: No quieras nada vil",
-            imagen:"assets/5.jpg",
-            price: 31000
-           
-        },
-        {
-            id: 6,
-            autor: "John Grisham",
-            name: "El intercambio",
-            imagen:"assets/6.jpg",
-            price: 26999
-           
-        },
-];
-
+let boooks = [];
 let cart = [];
 const peso = '$';
 const booksList = document.querySelector('#books');
@@ -59,26 +9,28 @@ const buttonEmptyCart = document.querySelector('#emptyCart');
 const buyBookButton = document.querySelector('#buyBook');
 
 
-// Mensaje de bienvenida con el nombre ingresado por el usuario
-saveUserData = () => {
-    let userNameInput = document.getElementById("userName");
-    let userEmailInput = document.getElementById("userEmail");
-    
-    const userObj = {
-        userName: userNameInput.value,
-        email: userEmailInput.value
-    }
-    localStorage.setItem("user", JSON.stringify(userObj));
-    alert("¡Hola " + userNameInput.value + ", encantado de verte!");
-};
+// Llama a la base de datos para obtener todos los libros disponibles en dicho archivo .json
+fetch('books.json')
+    .then(response => response.json())
+    .then(data => {
+        books = data;
+        renderBooks();
+        renderCart();
+    })
+    .catch(err => console.error(err));
+
 
 
 // Función que arma todos los productos del array de books en el HTML
 renderBooks = () => {
+    const booksDiv = document.getElementById('books');
+    if (!booksDiv) return;
+
+    booksDiv.innerHTML = '';
     books.forEach((info) => {
         
         const miNode = document.createElement('div');
-        miNode.classList.add('card', 'col-sm-4');
+        miNode.classList.add('card', 'col-sm-3', 'text-center');
         
         const miNodeCardBody = document.createElement('div');
         miNodeCardBody.classList.add('card-body');
@@ -94,10 +46,10 @@ renderBooks = () => {
         miNodeAutor.classList.add('card-text');
         miNodeAutor.textContent = info.autor;
 
-        // Imagen
+        // Image
         const miNodeImage = document.createElement('img');
-        miNodeImage.classList.add('img-fluid');
-        miNodeImage.setAttribute('src', info.imagen);
+        miNodeImage.classList.add('img-f', 'card-img-top');
+        miNodeImage.setAttribute('src', info.image);
 
         // Precio
         const miNodePrice = document.createElement('p');
@@ -106,7 +58,7 @@ renderBooks = () => {
 
         // Boton para agregar al carrito
         const miNodeButton = document.createElement('button');
-        miNodeButton.classList.add('btn', 'btn-primary');
+        miNodeButton.classList.add('btn', 'btn-primary', 'add-cart');
         miNodeButton.textContent = 'Añadir al carrito';
         miNodeButton.setAttribute('marker', info.id);
         miNodeButton.addEventListener('click', addToCart);
@@ -127,6 +79,8 @@ renderBooks = () => {
 addToCart = (event) => {
     cart.push(event.target.getAttribute('marker'));
     renderCart();
+    
+    toggleCart();
 }
 
 // Función que muestra todos los elementos cargados al carrito visualemente
@@ -159,6 +113,7 @@ renderCart = () => {
         cartEl.appendChild(miNode);
     });
     total.textContent = calcTotal();
+
 }
 
 // Función que elimina un libro del carrito
@@ -236,5 +191,7 @@ buttonEmptyCart.addEventListener('click', emptyCart);
 buyBookButton.addEventListener('click', buyBook);
 
 // Funciones que se inician con el proyecto
-renderBooks();
-renderCart();
+function toggleCart(){
+    document.querySelector('.sidecart').classList.toggle('open-cart');
+  }
+  
