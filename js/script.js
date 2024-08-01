@@ -3,15 +3,15 @@ let boooks = [];
 let cart = [];
 const price = '$';
 let currentItems = 0;
-const switchIcon = document.getElementById("switch");
-switchIcon.classList = "fa-solid fa-sun"
+const switchIcon = document.getElementById('switch');
+switchIcon.classList = 'fa-solid fa-sun';
 const booksList = document.querySelector('#books');
 const cartEl = document.querySelector('#cart');
 const total = document.querySelector('#total');
 const buttonEmptyCart = document.querySelector('#emptyCart');
 const buyBookButton = document.querySelector('#buyBook');
 let input = document.getElementById('input');
-let badge = document.getElementById("itemsAdded");
+let badge = document.getElementById('itemsAdded');
 
 
 // Llama a la base de datos para obtener todos los libros disponibles en dicho archivo .json
@@ -155,7 +155,7 @@ calcTotal = () => {
 emptyCart = () => {
     cart = [];
     currentItems = 0;
-    badge.innerHTML = "0"
+    badge.innerHTML = '0';
     renderCart();
 }
 
@@ -175,21 +175,21 @@ buyBook = () => {
         cart = [];
         renderCart();
         currentItems = 0;
-        badge.innerHTML = "0";
+        badge.innerHTML = '0';
     }, 5000);
 }
 
 
 // Función que genera un alert mostrando el resultado exitoso de la compra 
 showSuccessAlert = () => {
-    const user = localStorage.getItem("user");
+    const user = localStorage.getItem('user');
     const userData = JSON.parse(user);
 
-    const successAlert = document.createElement("div");
-    successAlert.role = "alert"
-    successAlert.className = "alert alert-success alert-dismissible fade show";
+    const successAlert = document.createElement('div');
+    successAlert.role = 'alert';
+    successAlert.className = 'alert alert-success alert-dismissible fade show';
     successAlert.textContent = `¡Muchísimas gracias por su compra ${userData.userName}! Pronto estará recibiendo en ${userData.email} la factura correspondiente.`
-    const container = document.querySelector(".show-alerts");
+    const container = document.querySelector('.show-alerts');
     container.appendChild(successAlert);
     toggleCart();
 
@@ -200,11 +200,11 @@ showSuccessAlert = () => {
 
 // Función que genera un alert avisandole al usuario que debe agregar un elemento para poder comprar
 showWarningAlert = () => {
-    const warningAlert = document.createElement("div");
-    warningAlert.role = "alert"
-    warningAlert.className = "alert alert-warning alert-dismissible fade show";
-    warningAlert.textContent = "Para continuar con la compra debe agregar por lo menos un item al carrito.";
-    const container = document.querySelector(".show-alerts");
+    const warningAlert = document.createElement('div');
+    warningAlert.role = 'alert';
+    warningAlert.className = 'alert alert-warning alert-dismissible fade show';
+    warningAlert.textContent = 'Para continuar con la compra debe agregar por lo menos un item al carrito.';
+    const container = document.querySelector('.show-alerts');
     container.appendChild(warningAlert);
     toggleCart();
 
@@ -215,64 +215,64 @@ showWarningAlert = () => {
 
 // Función para cambiar el modo visual de la página
 switchMode = () => {
-   let icon = document.getElementById("switch");
-   let navbar = document.getElementById("navbar");
+   let icon = document.getElementById('switch');
+   let navbar = document.getElementById('navbar');
    let sidecart = document.querySelector('.sidecart');
 
    
-   let cardBody = document.getElementsByClassName("card");
-   let cardTitle = document.getElementsByClassName("card-title");
-   let cardSubtitle = document.getElementsByClassName("card-text");
-   let cardAutor = document.getElementsByClassName("autor");
-   let cardPrice = document.getElementsByClassName("price");
-   let bookAdded = document.getElementsByClassName("list-group-item");
+   let cardBody = document.getElementsByClassName('card');
+   let cardTitle = document.getElementsByClassName('card-title');
+   let cardSubtitle = document.getElementsByClassName('card-text');
+   let cardAutor = document.getElementsByClassName('autor');
+   let cardPrice = document.getElementsByClassName('price');
+   let bookAdded = document.getElementsByClassName('list-group-item');
 
     if (document.documentElement.getAttribute('data-bs-theme') == 'dark') {
         document.documentElement.setAttribute('data-bs-theme','light')
-        icon.classList = "fa-solid fa-sun";
-        document.body.classList = "light-mode";
-        navbar.classList = "navbar-light";
-        sidecart.classList.toggle("sidecart-light")
-        sidecart.classList.remove("sidecart-dark");
+        icon.classList = 'fa-solid fa-sun';
+        document.body.classList = 'light-mode';
+        navbar.classList = 'navbar-light';
+        sidecart.classList.toggle('sidecart-light')
+        sidecart.classList.remove('sidecart-dark');
 
         for (let i = 0; i < cardTitle.length; i++) {
             ((index) => {
-                cardBody[index].classList.add("dark-body");
-                cardTitle[index].classList.add("light-text");
-                cardSubtitle[index].classList.add("light-text");
-                cardAutor[index].classList.add("light-text");
-                cardPrice[index].classList.add("light-text");
+                cardBody[index].classList.add('dark-body');
+                cardTitle[index].classList.add('light-text');
+                cardSubtitle[index].classList.add('light-text');
+                cardAutor[index].classList.add('light-text');
+                cardPrice[index].classList.add('light-text');
             })(i);
           }
 
           for(let i = 0; i < bookAdded.length; i++) {
             ((index) => {
-                    bookAdded[index].classList.add("dark-body");
+                    bookAdded[index].classList.add('dark-body');
             })(i);
           }
         
     }
     else {
-        icon.classList = "fa-solid fa-moon";
+        icon.classList = 'fa-solid fa-moon';
         document.documentElement.setAttribute('data-bs-theme','dark');
-        document.body.classList = "dark-mode"
-        navbar.classList = "navbar-dark"
-        sidecart.classList.toggle("sidecart-dark");
-        sidecart.classList.remove("sidecart-light")
+        document.body.classList = 'dark-mode';
+        navbar.classList = 'navbar-dark';
+        sidecart.classList.toggle('sidecart-dark');
+        sidecart.classList.remove('sidecart-light');
 
         for (let i = 0; i < cardTitle.length; i++) {
             ((index) => {
-                cardBody[index].classList.add("dark-body");
-                cardTitle[index].classList.add("dark-text");
-                cardSubtitle[index].classList.add("dark-text");
-                cardAutor[index].classList.add("dark-text");
-                cardPrice[index].classList.add("dark-text");
+                cardBody[index].classList.add('dark-body');
+                cardTitle[index].classList.add('dark-text');
+                cardSubtitle[index].classList.add('dark-text');
+                cardAutor[index].classList.add('dark-text');
+                cardPrice[index].classList.add('dark-text');
             })(i);
           }
 
           for(let i = 0; i < bookAdded.length; i++) {
             ((index) => {
-                    bookAdded[index].classList.add("dark-body");
+                    bookAdded[index].classList.add('dark-body');
             })(i);
           }
     }
@@ -281,7 +281,7 @@ switchMode = () => {
 
 // Función que filtra por titulo de libro
 filterByTitle = () => {
-    let booksCard = document.getElementsByClassName("card");
+    let booksCard = document.getElementsByClassName('card');
     let filter = input.value.toUpperCase();
         for (let i = 0; i < books.length; i++) {
              let bookName = booksCard[i].getElementsByClassName('card-title')[0].innerHTML;
