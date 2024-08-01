@@ -63,7 +63,7 @@ renderBooks = () => {
 
         // Boton para agregar al carrito
         const miNodeButton = document.createElement('button');
-        miNodeButton.classList.add('btn', 'btn-primary', 'add-cart');
+        miNodeButton.classList.add('btn', 'btn', 'add-cart');
         miNodeButton.textContent = 'Añadir al carrito';
         miNodeButton.setAttribute('marker', info.id);
         miNodeButton.addEventListener('click', addToCart);
@@ -80,6 +80,7 @@ renderBooks = () => {
     });
 }
 
+// Función para inicializar la vista
 initializeView = () => {
     boooks = [];
     cart = [];
@@ -173,10 +174,12 @@ buyBook = () => {
     }
     setTimeout(() => {
         cart = [];
+        input.value = '';
+        renderBooks();
         renderCart();
         currentItems = 0;
         badge.innerHTML = '0';
-    }, 5000);
+    }, 3000);
 }
 
 
@@ -195,7 +198,7 @@ showSuccessAlert = () => {
 
     setTimeout(() => {
         container.removeChild(successAlert)
-    }, 5000);
+    }, 3000);
 }
 
 // Función que genera un alert avisandole al usuario que debe agregar un elemento para poder comprar
@@ -210,73 +213,66 @@ showWarningAlert = () => {
 
     setTimeout(() => {
         container.removeChild(warningAlert)
-    }, 5000);
+    }, 3000);
 }
 
 // Función para cambiar el modo visual de la página
 switchMode = () => {
-   let icon = document.getElementById('switch');
-   let navbar = document.getElementById('navbar');
-   let sidecart = document.querySelector('.sidecart');
-
-   
-   let cardBody = document.getElementsByClassName('card');
-   let cardTitle = document.getElementsByClassName('card-title');
-   let cardSubtitle = document.getElementsByClassName('card-text');
-   let cardAutor = document.getElementsByClassName('autor');
-   let cardPrice = document.getElementsByClassName('price');
-   let bookAdded = document.getElementsByClassName('list-group-item');
-
-    if (document.documentElement.getAttribute('data-bs-theme') == 'dark') {
-        document.documentElement.setAttribute('data-bs-theme','light')
-        icon.classList = 'fa-solid fa-sun';
-        document.body.classList = 'light-mode';
-        navbar.classList = 'navbar-light';
-        sidecart.classList.toggle('sidecart-light')
-        sidecart.classList.remove('sidecart-dark');
-
-        for (let i = 0; i < cardTitle.length; i++) {
-            ((index) => {
-                cardBody[index].classList.add('dark-body');
-                cardTitle[index].classList.add('light-text');
-                cardSubtitle[index].classList.add('light-text');
-                cardAutor[index].classList.add('light-text');
-                cardPrice[index].classList.add('light-text');
-            })(i);
-          }
-
-          for(let i = 0; i < bookAdded.length; i++) {
-            ((index) => {
-                    bookAdded[index].classList.add('dark-body');
-            })(i);
-          }
-        
-    }
-    else {
-        icon.classList = 'fa-solid fa-moon';
-        document.documentElement.setAttribute('data-bs-theme','dark');
-        document.body.classList = 'dark-mode';
-        navbar.classList = 'navbar-dark';
-        sidecart.classList.toggle('sidecart-dark');
-        sidecart.classList.remove('sidecart-light');
-
-        for (let i = 0; i < cardTitle.length; i++) {
-            ((index) => {
-                cardBody[index].classList.add('dark-body');
-                cardTitle[index].classList.add('dark-text');
-                cardSubtitle[index].classList.add('dark-text');
-                cardAutor[index].classList.add('dark-text');
-                cardPrice[index].classList.add('dark-text');
-            })(i);
-          }
-
-          for(let i = 0; i < bookAdded.length; i++) {
-            ((index) => {
-                    bookAdded[index].classList.add('dark-body');
-            })(i);
-          }
-    }
-}
+    let icon = document.getElementById('switch');
+ 
+    
+    let cardBody = document.getElementsByClassName('card');
+    let cardTitle = document.getElementsByClassName('card-title');
+    let cardSubtitle = document.getElementsByClassName('card-text');
+    let cardAutor = document.getElementsByClassName('autor');
+    let cardPrice = document.getElementsByClassName('price');
+    let bookAdded = document.getElementsByClassName('list-group-item');
+ 
+     if (document.documentElement.getAttribute('data-bs-theme') == 'dark') {
+         document.documentElement.setAttribute('data-bs-theme','light')
+         icon.classList = 'fa-solid fa-sun';
+         document.body.classList = 'light-mode';
+ 
+         for (let i = 0; i < cardTitle.length; i++) {
+             ((index) => {
+                 cardBody[index].classList.add('dark-body');
+                 cardTitle[index].classList.add('light-text');
+                 cardSubtitle[index].classList.add('light-text');
+                 cardAutor[index].classList.add('light-text');
+                 cardPrice[index].classList.add('light-text');
+             })(i);
+           }
+ 
+           for(let i = 0; i < bookAdded.length; i++) {
+             ((index) => {
+                     bookAdded[index].classList.add('dark-body');
+             })(i);
+           }
+         
+     }
+     else {
+         icon.classList = 'fa-solid fa-moon';
+         document.documentElement.setAttribute('data-bs-theme','dark');
+         document.body.classList = 'dark-mode';
+ 
+         for (let i = 0; i < cardTitle.length; i++) {
+             ((index) => {
+                 cardBody[index].classList.add('dark-body');
+                 cardTitle[index].classList.add('dark-text');
+                 cardSubtitle[index].classList.add('dark-text');
+                 cardAutor[index].classList.add('dark-text');
+                 cardPrice[index].classList.add('dark-text');
+             })(i);
+           }
+ 
+           for(let i = 0; i < bookAdded.length; i++) {
+             ((index) => {
+                     bookAdded[index].classList.add('dark-body');
+             })(i);
+           }
+     }
+ }
+ 
 
 
 // Función que filtra por titulo de libro

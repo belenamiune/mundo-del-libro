@@ -108,5 +108,26 @@
         "name": "La Asistenta",
         "image":"assets/15.webp",
         "price": 26299
+    },
+    {
+        "id": 16,
+        "autor": "Christopher, Frayling",
+        "name": "Cine",
+        "image":"assets/16.webp",
+        "price": 50800
+    },
+    {
+        "id": 17,
+        "autor": "Diana, Aisenberg",
+        "name": "Historia del arte",
+        "image":"assets/17.webp",
+        "price": 21400
+    },
+    {
+        "id": 18,
+        "autor": "Karl, Schütz",
+        "name": "Vermeer",
+        "image":"assets/18.webp",
+        "price": 45500
     }
 ]

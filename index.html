@@ -6,20 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/6350051a31.js" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+     <!-- MDBootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.min.css" rel="stylesheet"/>
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"></script>
+    
     <link rel="shortcut icon" href="./assets/logo.png" />
     <title>El mundo del libro</title>
 </head>
 <body class="shadow min-vh-1002">
     <div class="container-fluid">
         <!-- Modal - Información de usuario -->
-        <div class="modal fade mymodal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Información del usuario</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form>
@@ -34,44 +40,81 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal()">Cancelar</button>
                     <button type="button" class="btn btn-primary" onclick="saveUserData()">Guardar</button>
                 </div>
             </div>
           </div>
         </div>
-        <div class="container-fluid navbar-container" id="navbar">
-              <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                <div class="container-fluid">
-                  <form class="d-flex">
-                    <input id="input" class="form-control me-2 search" onkeyup="filterByTitle()"  placeholder="¿Qué estás buscando?" aria-label="Search">
-                    <i class="fa-regular fa-circle-xmark" onclick="resetFilters()"></i>
-
-                  </form>
-                  <a class="navbar-brand" href="" onclick="initializeView()"><h2>El mundo del libro</h2></a>
-                  <div class="row">
-                    <div class="col-sm-5 switch-container">
-                      <div class="form-check form-switch">
-                        <i id="switch"></i>
-                        <input onclick="switchMode()" class="form-check-input" type="checkbox" role="switch">
-                      </div>
-                    </div>
-                    <div class="col-sm-7">
-
-                      <button class="btn btn-buy" onclick="toggleCart()">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <span id="itemsAdded">0</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </nav>
+  <!-- Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary"  id="navbar">
+      <div class="container-fluid justify-content-between">
+        <div class="d-flex">
+          <form class="input-group w-auto my-auto d-none d-sm-flex">
+            <input
+              onkeyup="filterByTitle()"
+              autocomplete="off"
+              class="form-control rounded"
+              placeholder="¿Qué estás buscando?"
+              style="min-width: 125px;"
+              id="input"
+            />
+            <span class="input-group-text border-0 d-none d-lg-flex">
+              <i class="fa-regular fa-circle-xmark" onclick="resetFilters()"></i></span>
+          </form>
         </div>
-        
-        <!-- ALERTS SECTION -->
-         <div class="show-alerts">
-          
-         </div>
+
+        <ul class="navbar-nav flex-row d-none d-md-flex">
+          <li class="nav-item me-3 me-lg-1">
+            <a class="nav-link" href="#"  onclick="initializeView()">
+              <img
+              src="./assets/logo.png"
+              height="40"
+              alt="MDB Logo"
+              loading="lazy"
+            />
+            </a>
+          </li>
+          <li class="nav-item me-3 mt-3 me-lg-1">
+            <h4>EL MUNDO DEL LIBRO</h4>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav flex-row">
+          <li class="nav-item dropdown me-3 me-lg-1">
+            <a
+              data-mdb-dropdown-init
+              class="nav-link dropdown-toggle hidden-arrow"
+              href="#"
+              id="navbarDropdownMenuLink"
+              role="button"
+              aria-expanded="false"
+            >
+            <div class="form-check form-switch">
+              <i id="switch"></i>
+              <input class="form-check-input" onclick="switchMode()" type="checkbox" role="switch" />
+            </div>
+            </a>
+          </li>
+            <li class="nav-item dropdown me-3 me-lg-1">
+              <a
+                data-mdb-dropdown-init
+                class="nav-link dropdown-toggle hidden-arrow"
+                href="#"
+                id="navbarDropdownMenuLink"
+                role="button"
+                aria-expanded="false"
+              >
+                <i class="fas fa-cart-shopping fa-xl" onclick="toggleCart()"></i>
+                <span id="itemsAdded" class="badge rounded-pill mb-5 badge-notification bg-danger">0</span>
+              </a>
+            </li>
+        </ul>
+        </div>
+      </nav> 
+      <!-- Alerts section -->
+         <div class="show-alerts"> </div>
+
            <!-- Carrito -->
             <div class="sidecart text-center" id="sidebar">
               <div class="row">
