@@ -14,9 +14,6 @@ body {
     background-color: rgb(203, 200, 200) !important;
 }
 
-.dark-mode {
-}
-
 
 h1 {
     text-align: center;
@@ -29,6 +26,19 @@ p {
 
 main {
   justify-content: space-evenly;
+}
+
+/* USER FORM */
+
+.btn-primary {
+  background-color: brown !important;
+  border: 1px solid brown !important;
+}
+
+#itemsAdded {
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
 }
 
 /* LIST OF BOOKS  */

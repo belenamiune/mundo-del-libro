@@ -2,6 +2,7 @@
 let boooks = [];
 let cart = [];
 const price = '$';
+let currentItems = 0;
 const switchIcon = document.getElementById("switch");
 switchIcon.classList = "fa-solid fa-sun"
 const booksList = document.querySelector('#books');
@@ -10,6 +11,7 @@ const total = document.querySelector('#total');
 const buttonEmptyCart = document.querySelector('#emptyCart');
 const buyBookButton = document.querySelector('#buyBook');
 let input = document.getElementById('input');
+let badge = document.getElementById("itemsAdded");
 
 
 // Llama a la base de datos para obtener todos los libros disponibles en dicho archivo .json
@@ -78,12 +80,26 @@ renderBooks = () => {
     });
 }
 
+initializeView = () => {
+    boooks = [];
+    cart = [];
+    currentItems = 0;
+    renderBooks();
+    renderCart();
+}
+
 // Función que añade el libro al carrito
 addToCart = (event) => {
     cart.push(event.target.getAttribute('marker'));
     renderCart();
+    showNumberOfItemsInCart();
 }
 
+// Función que muestra el número de productos disponibles en el carrito
+showNumberOfItemsInCart = () => {
+    currentItems++;
+    badge.innerHTML = currentItems;
+}
 // Función que muestra todos los elementos cargados al carrito visualemente
 renderCart = () => {
         cartEl.textContent = '';
@@ -138,6 +154,8 @@ calcTotal = () => {
 // Función que vacía el carrito
 emptyCart = () => {
     cart = [];
+    currentItems = 0;
+    badge.innerHTML = "0"
     renderCart();
 }
 
@@ -156,6 +174,8 @@ buyBook = () => {
     setTimeout(() => {
         cart = [];
         renderCart();
+        currentItems = 0;
+        badge.innerHTML = "0";
     }, 5000);
 }
 
@@ -258,10 +278,6 @@ switchMode = () => {
     }
 }
 
-// Eventos
-buttonEmptyCart.addEventListener('click', emptyCart);
-buyBookButton.addEventListener('click', buyBook);
-
 
 // Función que filtra por titulo de libro
 filterByTitle = () => {
@@ -277,7 +293,12 @@ filterByTitle = () => {
     }
 }
 
+// Función que resetea el filtro de búsqueda
 resetFilters = () => {
-    input.value = ""
+    input.value = '';
     renderBooks();
 }
+
+// Eventos
+buttonEmptyCart.addEventListener('click', emptyCart);
+buyBookButton.addEventListener('click', buyBook);
