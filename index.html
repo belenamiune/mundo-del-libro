@@ -25,12 +25,12 @@
           <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Información del usuario</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Completa tus datos:</h5>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Nombre de usuario:</label>
+                            <label for="recipient-name" class="col-form-label">Nombre:</label>
                             <input id="userName" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                         </div>
                         <div class="mb-3">
@@ -40,62 +40,48 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal()">Cancelar</button>
-                    <button type="button" class="btn btn-primary" onclick="saveUserData()">Guardar</button>
+                    <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal" onclick="closeModal()">Cancelar</button>
+                    <button type="button" class="btn btn-success" onclick="saveUserData()">Guardar</button>
                 </div>
             </div>
           </div>
         </div>
-  <!-- Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary"  id="navbar">
-      <div class="container-fluid justify-content-between">
-        <div class="d-flex">
-          <form class="input-group w-auto my-auto d-none d-sm-flex">
-            <input
-              onkeyup="filterByTitle()"
-              autocomplete="off"
-              class="form-control rounded"
-              placeholder="¿Qué estás buscando?"
-              style="min-width: 125px;"
-              id="input"
-            />
-            <span class="input-group-text border-0 d-none d-lg-flex">
-              <i class="fa-regular fa-circle-xmark" onclick="resetFilters()"></i></span>
-          </form>
-        </div>
+    <!-- Navbar-->
+      <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary"  id="navbar">
+        <div class="container-fluid justify-content-between">
+          <div class="d-flex">
+            <form class="input-group w-auto my-auto d-none d-sm-flex">
+              <input
+                onkeyup="filterByTitle()"
+                autocomplete="off"
+                class="form-control rounded"
+                placeholder="¿Qué estás buscando?"
+                style="min-width: 125px;"
+                id="input"
+              />
+              <span class="input-group-text border-0 d-none d-lg-flex">
+                <i class="fa-regular fa-circle-xmark" onclick="resetFilters()"></i>
+              </span>
+            </form>
+          </div>
 
-        <ul class="navbar-nav flex-row d-none d-md-flex">
-          <li class="nav-item me-3 me-lg-1">
-            <a class="nav-link" href="#"  onclick="initializeView()">
-              <img
-              src="./assets/logo.png"
-              height="40"
-              alt="MDB Logo"
-              loading="lazy"
-            />
-            </a>
-          </li>
-          <li class="nav-item me-3 mt-3 me-lg-1">
-            <h4>EL MUNDO DEL LIBRO</h4>
-          </li>
-        </ul>
+          <ul class="navbar-nav flex-row d-none d-md-flex">
+            <li class="nav-item me-3 me-lg-1">
+              <a class="nav-link" href="#"  onclick="initializeView()">
+                <img
+                src="./assets/logo.png"
+                height="40"
+                alt="MDL Logo"
+                loading="lazy"
+              />
+              </a>
+            </li>
+            <li class="nav-item me-3 mt-3 me-lg-1">
+              <h4>EL MUNDO DEL LIBRO</h4>
+            </li>
+          </ul>
 
-        <ul class="navbar-nav flex-row">
-          <li class="nav-item dropdown me-3 me-lg-1">
-            <a
-              data-mdb-dropdown-init
-              class="nav-link dropdown-toggle hidden-arrow"
-              href="#"
-              id="navbarDropdownMenuLink"
-              role="button"
-              aria-expanded="false"
-            >
-            <div class="form-check form-switch">
-              <i id="switch"></i>
-              <input class="form-check-input" onclick="switchMode()" type="checkbox" role="switch" />
-            </div>
-            </a>
-          </li>
+          <ul class="navbar-nav flex-row">
             <li class="nav-item dropdown me-3 me-lg-1">
               <a
                 data-mdb-dropdown-init
@@ -105,18 +91,32 @@
                 role="button"
                 aria-expanded="false"
               >
-                <i class="fas fa-cart-shopping fa-xl" onclick="toggleCart()"></i>
-                <span id="itemsAdded" class="badge rounded-pill mb-5 badge-notification bg-danger">0</span>
+              <div class="form-check form-switch">
+                <i id="switch"></i>
+                <input class="form-check-input" onclick="switchMode()" type="checkbox" role="switch" />
+              </div>
               </a>
             </li>
-        </ul>
-        </div>
-      </nav> 
-      <!-- Alerts section -->
-         <div class="show-alerts"> </div>
+              <li class="nav-item dropdown me-3 me-lg-1">
+                <a
+                  data-mdb-dropdown-init
+                  class="nav-link dropdown-toggle hidden-arrow"
+                  href="#"
+                  role="button"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-cart-shopping fa-xl" onclick="toggleCart()"></i>
+                  <span id="itemsAdded" class="badge rounded-pill mb-5 badge-notification bg-danger">0</span>
+                </a>
+              </li>
+          </ul>
+          </div>
+        </nav> 
+        <!-- Alerts section -->
+          <div class="show-alerts"> </div>
 
            <!-- Carrito -->
-            <div class="sidecart text-center" id="sidebar">
+            <nav class="sidecart  text-center" id="sidebar">
               <div class="row">
                 <div class="col-sm-7 mt-3 text-light"> <h4>Carrito</h4></div>
                 <div class="d-inline col-sm-5 mt-3 btn-return" onclick="toggleCart()"> 
@@ -124,7 +124,7 @@
                   </div>
                 </div>
                   <div class="cart">
-                      <ul id="cart" class="list-group"></ul>
+                      <ul id="cart" class="list-group list-group list-group-light"></ul>
                       <hr>
                       <!-- Total -->
                       <div class="totals">
@@ -135,7 +135,7 @@
                           <button id="buyBook" class="btn btn-success">Comprar</button> 
                       </div> 
                     </div>
-          </div>
+                </nav>
           <!-- Lista de libros -->
           <main id="books" class="row"></main>
     </div>

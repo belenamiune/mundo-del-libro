@@ -1,3 +1,4 @@
+
 /* BODY */
 * {
   box-sizing: border-box
@@ -11,8 +12,33 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100%;
-    background-color: rgb(203, 200, 200) !important;
+    background: linear-gradient(234deg, #ddd0c8, #323232);
+    -webkit-animation: transt 0s ease infinite;
+    -moz-animation: transt 0s ease infinite;
+    animation: transt 0s ease infinite;
 }
+
+/* transitions */
+  @-webkit-keyframes transt {
+    0%{background-position:0% 67%}
+    50%{background-position:100% 34%}
+    100%{background-position:0% 67%}
+  }
+  @-moz-keyframes transt {
+    0%{background-position:0% 67%}
+    50%{background-position:100% 34%}
+    100%{background-position:0% 67%}
+  }
+  @-o-keyframes transt {
+    0%{background-position:0% 67%}
+    50%{background-position:100% 34%}
+    100%{background-position:0% 67%}
+  }
+  @keyframes transt {
+    0%{background-position:0% 67%}
+    50%{background-position:100% 34%}
+    100%{background-position:0% 67%}
+  }
 
 
 h1 {
@@ -29,17 +55,11 @@ main {
 }
 
 /* USER FORM */
-
-.btn-primary {
-  background-color: brown !important;
-  border: 1px solid brown !important;
-}
-
 #itemsAdded {
   font-size: 14px;
   font-weight: 600;
-  color: white !important;
-  background-color: brown !important;
+  color:  #323232 !important;
+  background-color: #ddd0c8 !important;
   margin-top: -0.6em !important;
 }
 
@@ -49,7 +69,7 @@ main {
   margin-top: 5em !important;
   margin-bottom: 1em !important;
   width: var(--max);
-  background-color: rgb(241, 237, 237) !important;
+  background-color: rgb(227, 226, 226) !important;
 }
 
 .card-body, .card-title {
@@ -76,6 +96,10 @@ ul {
   width: 350px;
 }
 
+.li-span {
+  margin-left: 1em !important;
+}
+
 .img-f {
   max-width: 230px !important;
 }
@@ -85,34 +109,34 @@ ul {
 }
 
 /* NAVBAR */
-.navbar-container {
-  align-items: baseline
+
+.form-switch .form-check-input:checked[type=checkbox]:after {
+  background-color: #DDD0C8 !important;
 }
 
-a {
-  text-transform: uppercase;
-  font-weight: 600;
-  color: brown !important;
+.form-check-input:checked {
+  background-color: #323232 !important;
+  border-color: #323232 !important;
+}
+
+.form-check-input:focus {
+  border-color: #323232 !important;
+  box-shadow:  0 0 .25rem rgba(155, 152, 152, 0.25) !important
 }
 
 
 .form-control:focus {
-  border-color: brown !important;
-  box-shadow: 0 0 0 .25rem rgba(185, 30, 9, 0.25) !important;
+  border-color: #323232 !important;
+  box-shadow: 0 0 0 .25rem hwb(23 78% 13% / 0.142) !important;
 }
 
 .fa-circle-xmark {
   color: rgb(111, 111, 111);
 }
 
-.btn-buy {
-  background-color: brown !important;
-}
-
 .fa-cart-shopping {
-  color: black;
+  color: #323232;
 }
-
 
 .form-control {
   margin-bottom: 0.5em;
@@ -130,23 +154,35 @@ a {
 }
 
 h4 {
+  color: #323232 !important;
   text-align: end;
 }
 
 .add-cart {
   margin-top: 1em;
-  background-color: brown !important;
-  border: 1px solid brown !important;
-  color: white !important;
+  background-color: #323232 !important;
+  border: 1px solid #323232 !important;
+  color: #DDD0C8 !important;
   box-shadow:  4px 9px -4px rgb(61, 60, 61) !important;
 }
 
 .btn-danger {
+  box-shadow: none !important;
+  background-color: #574B53 !important; 
   margin-left: 1em !important;
 }
 
 .btn-delete {
+  color: white !important;
+  box-shadow: none !important;
+  background-color: #574B53 !important; 
   margin-left: -5em !important;
+}
+
+.btn-success {
+  color: white !important;
+  box-shadow: none !important;
+  background-color: #A3B476 !important;
 }
 
 .btn-return {
@@ -226,6 +262,26 @@ h4 {
   background-color: rgb(214, 207, 207) !important;
 }
 
+.light-body {
+  background-color: rgb(227, 226, 226) !important;
+}
+
+.light-text {
+   color: black !important;
+}
+
+.light-item {
+  background-color: rgb(243, 239, 239) !important;
+}
+
+.light-button {
+  background-color: #323232 !important;
+  color: #DDD0C8 !important;
+}
+
+.light-span {
+  color: black !important;
+}
 
 /* DARK MODE */
 [data-bs-theme="dark"] {
@@ -252,22 +308,16 @@ h4 {
   color: white !important;
 }
 
-
-.form-check-input:checked {
-  background-color: brown !important;
-  border-color: brown !important;
+.dark-button {
+  background-color: #DDD0C8 !important;
+  color: #323232 !important;
 }
 
-.form-check-input:focus {
-  border-color: brown !important;
-  box-shadow:  0 0 .25rem rgba(172, 4, 4, 0.25) !important
+.dark-span {
+  color: white !important;
 }
 
 .sidecart-dark {
   background-color: rgba(var(--bs-tertiary-bg-rgb), var(--bs-bg-opacity)) !important;
   border: 1px solid rgba(99, 99, 99, 0.354) !important;
-}
-
-.form-switch .form-check-input:checked[type=checkbox]:after {
-  background-color: brown !important;
 }
